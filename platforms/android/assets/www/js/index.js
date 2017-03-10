@@ -112,9 +112,10 @@ var app = {
             console.log("push error = " + e.message);
         });
 
-        function getTarea(buttonIndex){
+        function getTarea(buttonIndex, message){
+        	var res = str.split("tarea");
         if (buttonIndex==1){
-            window.open('http://sistema.adp.mx', '_system', 'location=no');
+            window.open(res[1], '_system', 'location=no');
             }
         }
 
@@ -122,7 +123,9 @@ var app = {
             console.log('notification event');
             navigator.notification.confirm(
                 data.message,         // message
-                getTarea,                 // callback
+                function(buttonIndex){
+		            getTarea(buttonIndex, data.message);
+		        },                 // callback
                 "Ver Tarea?",           // title
                 ['Ok',"Despues"]                  // buttonName
             );
