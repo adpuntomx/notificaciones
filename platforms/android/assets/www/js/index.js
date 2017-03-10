@@ -113,7 +113,7 @@ var app = {
         });
 
         function getTarea(buttonIndex, message){
-        	var res = str.split("tarea");
+        	var res = message.split("tarea");
         if (buttonIndex==1){
             window.open(res[1], '_system', 'location=no');
             }
