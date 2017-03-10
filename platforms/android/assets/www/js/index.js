@@ -63,7 +63,7 @@ var app = {
                 // Post registrationId to your app server as the value has changed
             }
 
-            alert('Callback Success! Result = '+data.registrationId);
+            alert('Callback Success! V 2= '+data.registrationId);
 
 
 
