@@ -112,13 +112,19 @@ var app = {
             console.log("push error = " + e.message);
         });
 
+        function getTarea(buttonIndex){
+        if (buttonIndex==1){
+            window.open('http://sistema.adp.mx', '_system', 'location=no');
+            }
+        }
+
         push.on('notification', function(data) {
             console.log('notification event');
-            navigator.notification.alert(
+            navigator.notification.confirm(
                 data.message,         // message
-                null,                 // callback
-                data.title,           // title
-                'Ok'                  // buttonName
+                getTarea,                 // callback
+                "Ver Tarea?",           // title
+                ['Ok',"Despues"]                  // buttonName
             );
        });
     }
