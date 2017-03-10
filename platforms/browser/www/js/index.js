@@ -41,7 +41,7 @@ var app = {
         console.log('calling push init');
         var push = PushNotification.init({
             "android": {
-                "senderID": "earnest-acre-136423"
+                "senderID": "332881619353"
             },
             "browser": {},
             "ios": {
@@ -62,6 +62,8 @@ var app = {
                 localStorage.setItem('registrationId', data.registrationId);
                 // Post registrationId to your app server as the value has changed
             }
+
+            alert('Callback Success! Result = '+data.registrationId);
 
             var parentElement = document.getElementById('registration');
             var listeningElement = parentElement.querySelector('.waiting');
