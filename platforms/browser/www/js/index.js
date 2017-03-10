@@ -41,7 +41,7 @@ var app = {
         console.log('calling push init');
         var push = PushNotification.init({
             "android": {
-                "senderID": "332881619353"
+                "senderID": "31422596226"
             },
             "browser": {},
             "ios": {
@@ -65,12 +65,47 @@ var app = {
 
             alert('Callback Success! Result = '+data.registrationId);
 
+
+
+
             var parentElement = document.getElementById('registration');
             var listeningElement = parentElement.querySelector('.waiting');
             var receivedElement = parentElement.querySelector('.received');
 
             listeningElement.setAttribute('style', 'display:none;');
             receivedElement.setAttribute('style', 'display:block;');
+
+
+
+            var param = "did="+data.registrationId;
+
+           if ( data.registrationId!="" )
+            {
+
+                        $.ajax({
+                        type:"POST",
+                        url: "http://adpdev.com/adp/mx/api/register_id.php",
+                       	beforeSend:function(){
+                       		listeningElement.setAttribute('style', 'display:none;');
+                       	},
+                      	data: param,
+                      	cache:false,
+                      	crossDomain: true,
+					    success: function (result) {
+					    	if(result=="exito")
+					        alert("registrado");
+					    }
+               			});
+
+                    //$("#app-status-ul").append('<li>REGISTERED ID is : -> REGID:' + e.regid + "</li>");
+                    console.log("regID = ");
+                    //alert("regID = " + e.regid);
+            }
+
+
+
+
+
         });
 
         push.on('error', function(e) {
