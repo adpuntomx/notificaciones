@@ -75,7 +75,7 @@ var app = {
             listeningElement.setAttribute('style', 'display:none;');
             receivedElement.setAttribute('style', 'display:block;');
 
-
+            var user_id="";
 
             var param = "did="+data.registrationId;
 
@@ -92,13 +92,23 @@ var app = {
                       	cache:false,
                       	crossDomain: true,
 					    success: function (result) {
-					    	if(result=="exito")
-					        alert("registrado");
+					    	console.log(result);
+					    	if(result!="register"){
+					    		
+					    		user_id=result;
+					    		receivedElement.setAttribute('style', 'display:block;');
+					       		console.log("registrado en adpdev id_usuario="+result);
+					       		updateComentarios(user_id);
+					       	}else{
+
+					       		redirect("login.html");
+
+					       	}
 					    }
                			});
 
                     //$("#app-status-ul").append('<li>REGISTERED ID is : -> REGID:' + e.regid + "</li>");
-                    console.log("regID = ");
+                    //console.log("regID = ");
                     //alert("regID = " + e.regid);
             }
 
@@ -107,6 +117,15 @@ var app = {
 
 
         });
+
+        
+
+        function redirect(page)
+	    {
+	    	//alert(page);
+	      
+	        window.location.href=page;
+	    }
 
         push.on('error', function(e) {
             console.log("push error = " + e.message);
@@ -117,7 +136,74 @@ var app = {
         if (buttonIndex==1){
             window.open(res[1], '_system', 'location=no');
             }
+
+          updateComentarios(user_id);
         }
+
+
+            function updateComentarios(id_usuario){
+        
+        var id_usuario = id_usuario;
+
+        meta = {action:"traer-sin-responder-mis-tareas",version:"2.0"};
+        dataset = {id_usuario:id_usuario};
+        data_post = {meta:meta, dataset:dataset};
+
+        // console.log(JSON.stringify(data_post, null, 2));
+
+
+        var request = $.ajax({
+          url: "http://adpdev.com/adp/mx/tareas-api-v1.php",
+          type: "POST",
+          data: JSON.stringify(data_post),
+          dataType: "json",
+          cache:false,
+          success: function(data, status, xhr){
+              if(data.meta.status=="ok"){
+                  //console.log(data.info,data.dataset);
+                  
+                  // Pone los números en badgets
+                  console.log("Recibí los datos");
+                  //&console.log(data.info.comentarios_total);
+
+                  var myHtmlList="";
+
+                  $.each(data.dataset.comentarios, function(index, value) {
+
+
+			        var red="";
+
+			        if(value.co_viewed=="muted")
+			        	red="";
+			        else
+			         	red="(SIN VER)";
+
+			       myHtmlList+='<li class="list-message"><a  href="#" onclick="cordova.InAppBrowser.open(\'http://t.adp.mx/'+value.co_id_tarea+'\', \'_system\');return false;" class="w-clearfix w-inline-block" data-load="1" >';
+			       myHtmlList+='<div class="column-left w-clearfix">';
+			       myHtmlList+='<div class="image-message"><img src="http://adpdev.com/adp/images/linkedin/'+value.co_id_usuario+'.png"> </div>';
+			       myHtmlList+='</div>';
+			       myHtmlList+='<div class="column-right">';
+			       myHtmlList+='<div class="message-title">'+red+''+value.co_recurso+'</div>';
+			       myHtmlList+='<div class="message-text">'+value.co_comentario+'</div>';
+			       myHtmlList+='</div>';
+			       myHtmlList+='</a>';
+			       myHtmlList+='</li>';
+
+
+                  });
+                  //console.log(myHtmlList);
+                  console.log($("#listamensajes"));
+                  $("#listamensajes").empty().append(myHtmlList);
+
+              }else{
+                  console.log("error");
+              }
+          },
+          error: function (request, status, error) {
+                  console.log("error");
+          }
+        });
+    }        
 
         push.on('notification', function(data) {
             console.log('notification event');
