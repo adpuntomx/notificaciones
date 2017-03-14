@@ -92,6 +92,7 @@
     </platform>
     <access origin="*" />
     <access origin="http://adpdev.com" />
+    <allow-intent href="http://t.adp.mx/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
