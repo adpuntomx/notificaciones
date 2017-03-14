@@ -92,6 +92,8 @@
     </platform>
     <access origin="*" />
     <access origin="http://adpdev.com" />
+    <access origin="http://t.adp.mx/*" launch-external="yes" />
+    <access origin="http://adpdev.com/*" launch-external="yes" />
     <allow-intent href="http://t.adp.mx/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
