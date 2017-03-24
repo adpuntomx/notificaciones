@@ -256,6 +256,7 @@ a {
 
 .list.list-messages {
   border-top: 1px solid #e7e7e9;
+  background-color: #fffef5;
 }
 
 .list.list-chats {
@@ -1250,6 +1251,19 @@ a {
   height: 48px;
   margin-top: 7px;
   border-radius: 25px;
+  border:2px solid #00ff00;
+
+}
+
+.image-message-unread { 
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 48px;
+  height: 48px;
+  margin-top: 7px;
+  border-radius: 25px;
+  border:3px solid #ff0000;
 }
 
 .column-left {
@@ -1261,11 +1275,23 @@ a {
   text-align: center;
 }
 
+.time-elapsed{
+  font-size:7px;
+  text-overflow: hidden;
+
+}
+
+.time-elapsed-unread{
+  font-size:7px;
+  color: #ff0000;
+}
+
 .message-title {
   display: inline-block;
   padding-top: 3px;
   padding-bottom: 5px;
-  font-size: 14px;
+  font-size: 13px;
+  text-overflow: ellipsis;
 }
 
 .list-message {
@@ -1297,8 +1323,9 @@ a {
 .message-text {
   display: block;
   padding-bottom: 3px;
-  color: #a3a3a3;
-  font-size: 11px;
+  color: #333333;
+  font-size: 10px;
+  font-style: italic;
   line-height: 1.6em;
   text-decoration: none;
 }

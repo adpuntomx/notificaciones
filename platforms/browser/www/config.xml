@@ -10,6 +10,9 @@
     <content src="index.html" />
     <access origin="*" />
     <access origin="http://adpdev.com" />
+    <access launch-external="yes" origin="http://t.adp.mx/*" />
+    <access launch-external="yes" origin="http://adpdev.com/*" />
+    <allow-intent href="http://t.adp.mx/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />

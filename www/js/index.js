@@ -176,17 +176,21 @@ var app = {
 			        if(value.co_viewed=="muted")
 			        	red="";
 			        else
-			         	red="(SIN VER)";
+			         	red="-unread";
 
 			       myHtmlList+='<li class="list-message"><a  href="#" onclick="cordova.InAppBrowser.open(\'http://t.adp.mx/'+value.co_id_tarea+'\', \'_system\');return false;" class="w-clearfix w-inline-block" data-load="1" >';
 			       myHtmlList+='<div class="column-left w-clearfix">';
-			       myHtmlList+='<div class="image-message"><img src="http://adpdev.com/adp/images/linkedin/'+value.co_id_usuario+'.png"> </div>';
+			       myHtmlList+='<div class="image-message'+red+'"><img src="http://adpdev.com/adp/images/linkedin/'+value.co_id_usuario+'.png">  </div> <div class="time-elapsed'+red+'">'+value.co_fecha_registro+'</div>';
 			       myHtmlList+='</div>';
 			       myHtmlList+='<div class="column-right">';
-			       myHtmlList+='<div class="message-title">'+red+''+value.co_recurso+'</div>';
-			       myHtmlList+='<div class="message-text">'+value.co_comentario+'</div>';
+			       myHtmlList+='<div class="message-title"><strong>'+value.co_recurso+'</strong> en '+value.co_nombre_tarea+' </div>';
+			       
+             myHtmlList+='<div class="message-text">'+value.co_comentario+'</div>';
+
 			       myHtmlList+='</div>';
+
 			       myHtmlList+='</a>';
+               myHtmlList+='<div class="time-elapsed'+red+'">'+value.co_nombre_cliente+'</div>';
 			       myHtmlList+='</li>';
 
 
@@ -207,7 +211,7 @@ var app = {
 
         push.on('notification', function(data) {
             console.log('notification event');
-            navigator.notification.confirm(
+            navigator.notification.alert(
                 data.message,         // message
                 function(buttonIndex){
 		            getTarea(buttonIndex, data.message);
@@ -215,6 +219,17 @@ var app = {
                 "Ver Tarea?",           // title
                 ['Ok',"Despues"]                  // buttonName
             );
+
+            navigator.notification.alert(
+                data.message,         // message
+                function(buttonIndex){
+                getTarea(buttonIndex, data.message);
+            },                 // callback
+                "Ver Tarea?",           // title
+                ['Ok',"Despues"]                  // buttonName
+            );
+
+
        });
     }
 };
