@@ -212,13 +212,13 @@ var app = {
         push.on('notification', function(data) {
             console.log('notification event');
             updateComentarios(user_id);
-            navigator.notification.confirm(
+            navigator.notification.alert(
                 data.message,         // message
                 function(buttonIndex){
 		            getTarea(buttonIndex, data.message);
 		        },                 // callback
                 "¿Ver Tarea?",           // title
-                ['Si',"Más tarde"]                  // buttonName
+                ['Si']                  // buttonName
             );
 
 
