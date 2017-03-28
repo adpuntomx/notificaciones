@@ -211,23 +211,17 @@ var app = {
 
         push.on('notification', function(data) {
             console.log('notification event');
+            updateComentarios(user_id);
             navigator.notification.alert(
                 data.message,         // message
                 function(buttonIndex){
 		            getTarea(buttonIndex, data.message);
 		        },                 // callback
-                "Ver Tarea?",           // title
-                ['Ok',"Despues"]                  // buttonName
+                "¿Ver Tarea?",           // title
+                ['Si',"Más tarde"]                  // buttonName
             );
 
-            navigator.notification.alert(
-                data.message,         // message
-                function(buttonIndex){
-                getTarea(buttonIndex, data.message);
-            },                 // callback
-                "Ver Tarea?",           // title
-                ['Ok',"Despues"]                  // buttonName
-            );
+
 
 
        });
