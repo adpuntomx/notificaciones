@@ -178,7 +178,7 @@ var app = {
 			        else
 			         	red="-unread";
 
-			       myHtmlList+='<li class="list-message"><a  href="#" onclick="cordova.InAppBrowser.open(\'http://t.adp.mx/'+value.co_id_tarea+'\', \'_system\');return false;" class="w-clearfix w-inline-block" data-load="1" >';
+			       myHtmlList+='<li class="list-message"><a  href="#" onclick="cordova.InAppBrowser.open(\'http://t.adp.mx/'+value.co_id_tarea+'#ultimoc\', \'_system\');return false;" class="w-clearfix w-inline-block" data-load="1" >';
 			       myHtmlList+='<div class="column-left w-clearfix">';
 			       myHtmlList+='<div class="image-message'+red+'"><img src="http://adpdev.com/adp/images/linkedin/'+value.co_id_usuario+'.png">  </div> <div class="time-elapsed'+red+'">'+value.co_fecha_registro+'</div>';
 			       myHtmlList+='</div>';
@@ -211,23 +211,17 @@ var app = {
 
         push.on('notification', function(data) {
             console.log('notification event');
-            navigator.notification.alert(
+            updateComentarios(user_id);
+            navigator.notification.confirm(
                 data.message,         // message
                 function(buttonIndex){
 		            getTarea(buttonIndex, data.message);
 		        },                 // callback
-                "Ver Tarea?",           // title
-                ['Ok',"Despues"]                  // buttonName
+                "¿Ver Tarea?",           // title
+                ['Si',"Más tarde"]                  // buttonName
             );
 
-            navigator.notification.alert(
-                data.message,         // message
-                function(buttonIndex){
-                getTarea(buttonIndex, data.message);
-            },                 // callback
-                "Ver Tarea?",           // title
-                ['Ok',"Despues"]                  // buttonName
-            );
+
 
 
        });
