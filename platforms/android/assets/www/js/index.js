@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var user_id="";
 var app = {
     // Application Constructor
     initialize: function() {
@@ -75,7 +76,7 @@ var app = {
             listeningElement.setAttribute('style', 'display:none;');
             receivedElement.setAttribute('style', 'display:block;');
 
-            var user_id="";
+            user_id="";
 
             var param = "did="+data.registrationId;
 
@@ -96,6 +97,7 @@ var app = {
 					    	if(result!="register"){
 					    		
 					    		user_id=result;
+					    		//localStorage.setItem('user_id', data.registrationId);
 					    		receivedElement.setAttribute('style', 'display:block;');
 					       		console.log("registrado en adpdev id_usuario="+result);
 					       		updateComentarios(user_id);
@@ -141,7 +143,9 @@ var app = {
         }
 
 
-            function updateComentarios(id_usuario){
+       function updateComentarios(id_usuario){
+
+       	console.log("Renueva comentarios de "+id_usuario);
         
         var id_usuario = id_usuario;
 
@@ -212,14 +216,14 @@ var app = {
         push.on('notification', function(data) {
         	 updateComentarios(user_id);
             console.log('notification event');
-            navigator.notification.alert(
+            /*navigator.notification.alert(
                 data.message,         // message
                 function(buttonIndex){
 		            getTarea(buttonIndex, data.message);
 		        },                 // callback
-                "Ver Tarea?",           // title
+                "¿Ver Tarea?",           // title
                 ['Ok']                  // buttonName
-            );
+            );*/
 
 
 
