@@ -95,7 +95,7 @@ var app = {
 					    success: function (result) {
 					    	console.log(result);
 					    	if(result!="register"){
-					    		
+
 					    		user_id=result;
 					    		//localStorage.setItem('user_id', data.registrationId);
 					    		receivedElement.setAttribute('style', 'display:block;');
@@ -120,12 +120,12 @@ var app = {
 
         });
 
-        
+
 
         function redirect(page)
 	    {
 	    	//alert(page);
-	      
+
 	        window.location.href=page;
 	    }
 
@@ -146,7 +146,7 @@ var app = {
        function updateComentarios(id_usuario){
 
        	console.log("Renueva comentarios de "+id_usuario);
-        
+
         var id_usuario = id_usuario;
 
         meta = {action:"traer-sin-responder-mis-tareas",version:"2.0"};
@@ -165,7 +165,7 @@ var app = {
           success: function(data, status, xhr){
               if(data.meta.status=="ok"){
                   //console.log(data.info,data.dataset);
-                  
+
                   // Pone los números en badgets
                   console.log("Recibí los datos");
                   //&console.log(data.info.comentarios_total);
@@ -182,20 +182,31 @@ var app = {
 			        else
 			         	red="-unread";
 
-			       myHtmlList+='<li class="list-message"><a  href="#" onclick="cordova.InAppBrowser.open(\'http://t.adp.mx/'+value.co_id_tarea+'\', \'_system\');return false;" class="w-clearfix w-inline-block" data-load="1" >';
-			       myHtmlList+='<div class="column-left w-clearfix">';
-			       myHtmlList+='<div class="image-message'+red+'"><img src="http://adpdev.com/adp/images/linkedin/'+value.co_id_usuario+'.png">  </div> <div class="time-elapsed'+red+'">'+value.co_fecha_registro+'</div>';
-			       myHtmlList+='</div>';
-			       myHtmlList+='<div class="column-right">';
-			       myHtmlList+='<div class="message-title"><strong>'+value.co_recurso+'</strong> en '+value.co_nombre_tarea+' </div>';
-			       
-             myHtmlList+='<div class="message-text">'+value.co_comentario+'</div>';
-
-			       myHtmlList+='</div>';
-
-			       myHtmlList+='</a>';
-               myHtmlList+='<div class="time-elapsed'+red+'">'+value.co_nombre_cliente+'</div>';
-			       myHtmlList+='</li>';
+			       myHtmlList+=`
+                 <li class="list-message">
+                   <a  href="#" onclick="cordova.InAppBrowser.open('http://t.adp.mx/${value.co_id_tarea}', '_system');return false;" class="w-clearfix w-inline-block" data-load="1" >
+                     <div class="column-left w-clearfix">
+                       <div class="image-message ${red}">
+                         <img src="http://adpdev.com/adp/images/linkedin/${value.co_id_usuario}.png">
+                       </div>
+                       <div class="time-elapsed ${red}">
+                         ${value.co_fecha_registro}
+                       </div>
+                     </div>
+                     <div class="column-right">
+                       <div class="message-title">
+                         <strong>${value.co_recurso}</strong> en ${value.co_nombre_tarea}
+                       </div>
+                       <div class="message-text">
+                         ${value.co_comentario}
+                       </div>
+                     </div>
+                   </a>
+                   <div class="time-elapsed ${red}">
+                     ${value.co_nombre_cliente}
+                   </div>
+                 </li>
+             `;
 
 
                   });
@@ -211,7 +222,7 @@ var app = {
                   console.log("error");
           }
         });
-    }        
+    }
 
         push.on('notification', function(data) {
         	 updateComentarios(user_id);
