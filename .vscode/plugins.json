@@ -1,0 +1,1 @@
+{"plugins":["cordova-plugin-statusbar","phonegap-plugin-push","cordova-plugin-console","cordova-plugin-dialogs","cordova-plugin-whitelist","cordova-plugin-inappbrowser"]}
